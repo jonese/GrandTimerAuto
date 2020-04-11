@@ -204,7 +204,6 @@ namespace GrandTimerAuto
 
                 string etcName = "lblETC" + i.ToString();
                 Label lblETC = (Label)this.Controls[etcName];
-                lblETC.Text = "";
 
                 if (ctn.Checked)
                 {
@@ -212,7 +211,10 @@ namespace GrandTimerAuto
                     int etc = Constants.MAXSECONDS[i - 1] - totalSeconds;
                     lblETC.Text = (DateTime.Now + (new TimeSpan(0, 0, etc))).ToString();
                 }
-
+                else
+                {
+                    lblETC.Text = "";
+                }
                 if (totalSeconds > 0)
                 {
                     if (totalSeconds > Constants.MAXSECONDS[i - 1])
