@@ -18,6 +18,8 @@ namespace GrandTimerAuto
         public Form1()
         {
             InitializeComponent();
+            dateTimePicker1.Value = (DateTime)Properties.Settings.Default["lastCasinoVisit"];
+
             ClearForm();
             ServiceGoods(0);
 
@@ -80,7 +82,7 @@ namespace GrandTimerAuto
         // ========================================
         private void btnClearLobby_Click(object sender, EventArgs e)
         {
-            string serviceName = "GTA";
+            string serviceName = "GTA5";
             Process[] processes = Process.GetProcessesByName(serviceName);
             foreach (Process process in processes)
             {
@@ -103,6 +105,7 @@ namespace GrandTimerAuto
         {
             Properties.Settings.Default["lastCasinoVisit"] = DateTime.Now;
             Properties.Settings.Default.Save();
+            dateTimePicker1.Value = (DateTime)Properties.Settings.Default["lastCasinoVisit"];
         }
         private void btnReset_Click(object sender, EventArgs e)
         {
@@ -128,6 +131,11 @@ namespace GrandTimerAuto
         private void btnSession_Click(object sender, EventArgs e)
         {
             _sessionExpiration = DateTime.Now + _FeeDeadline;
+        }
+        private void btnSetCasino_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default["lastCasinoVisit"] = dateTimePicker1.Value;
+            Properties.Settings.Default.Save();
         }
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -376,12 +384,6 @@ namespace GrandTimerAuto
         private void cb7_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default["checked7"] = cb7.Checked;
-            Properties.Settings.Default.Save();
-        }
-
-        private void btnSetCasino_Click(object sender, EventArgs e)
-        {
-            Properties.Settings.Default["lastCasinoVisit"] = dateTimePicker1.Value;
             Properties.Settings.Default.Save();
         }
         #endregion
